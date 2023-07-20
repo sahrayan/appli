@@ -1,13 +1,12 @@
 <?php
-session_start(); 
+session_start();
 
-if (isset($_POST['submit'])) { 
+if (isset($_POST['submit'])) {
+    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
-    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS); 
-    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION); 
-    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT); 
-    if ($name && $price !== false && $qtt !== false) {
-
+    if ($name && $price && $qtt) {
         $product = [
             "name" => $name,
             "price" => $price,
@@ -15,13 +14,20 @@ if (isset($_POST['submit'])) {
             "total" => $price * $qtt
         ];
 
-        if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
-            $_SESSION["products"] = array(); // Initialise la session si elle est vide
+        if (!isset($_SESSION["products"])) {
+            $_SESSION["products"] = array();
         }
 
-        $_SESSION["products"][] = $product; // Ajoute le produit à la session
-    }
-} 
+        $_SESSION["products"][] = $product;
 
-header("Location: index.php"); // Redirige l'utilisateur vers la page index.php
+        // Message de succès
+        $_SESSION["message"] = "Produit ajouté avec succès !";
+    } else {
+        // Message d'erreur
+        $_SESSION["message"] = "Erreur : Veuillez remplir correctement tous les champs !";
+    }
+}
+
+header("Location:index.php");
+exit();
 ?>
