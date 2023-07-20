@@ -12,6 +12,20 @@
     <title>Récapitulatif des produits</title>
 </head>
 <body>
+        <!-- Menu de navigation -->
+        <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="recap.php">Récapitulatif</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container mt-5">
         <?php 
             if(!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
