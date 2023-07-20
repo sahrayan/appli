@@ -12,18 +12,20 @@
     <title>Récapitulatif des produits</title>
 </head>
 <body>
-        <!-- Menu de navigation -->
-        <nav class="navbar navbar-expand navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-light bg-light">
         <div class="container">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Accueil</a>
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="recap.php">Récapitulatif</a>
+                    <a class="nav-link" href="recap.php">
+                        Récapitulatif<?php echo isset($_SESSION['products']) ? ' (' . count($_SESSION['products']) . ')' : ''; ?>
+                    </a>
                 </li>
             </ul>
         </div>
+    </nav>
     </nav>
 
     <div class="container mt-5">
@@ -62,5 +64,7 @@
             }
         ?>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
